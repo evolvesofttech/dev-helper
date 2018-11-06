@@ -30,10 +30,12 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-sm btn-warning">
+              <a 
+                class="btn btn-sm btn-warning" 
+                [routerLink]="[ '/admin/edit-category', category._id ]">
                 <i class="fa fa-edit"></i>
-              </button>
-              <button class="btn btn-sm btn-primary">
+              </a>
+              <button class="btn btn-sm btn-primary" (click)="onDelete(category._id)">
                 <i class="fa fa-trash"></i>
               </button>
             </div>

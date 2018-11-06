@@ -6,3 +6,7 @@
     -webkit-box-shadow: 0 0 0 0.2rem rgba(15, 119, 217, 0.25);
             box-shadow: 0 0 0 0.2rem rgba(15, 119, 217, 0.25);
   }
+
+  .ql-editor {
+      min-height: 300px;
+  }

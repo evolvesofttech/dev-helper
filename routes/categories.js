@@ -19,10 +19,24 @@ router.get('/test', (req, res) => {
 router.get('/', (req, res) => {
     Category.find()
         .populate('user', ['name', 'email'])
-        .sort({ name:-1 })
+        .sort({ name:1 })
         .then(categories => res.json(categories))
         .catch(err => res.status(404).json({ notfound: 'Categories not found.'}));
 });
+
+//@Route    GET /api/categories/:id
+//@Desc     Get category by id
+//@Access   Public
+router.get('/:cat_id', (req, res) => {
+    Category.findById(req.params.cat_id)
+        .then(category => {
+            if (category) {
+                res.status(200).json(category);
+            } else {
+                res.status(404).json({ message: "Category not found!" });
+            }
+        })
+});//Get by id ends
 
 //@Route    POST /api/categories
 //@Desc     Create category

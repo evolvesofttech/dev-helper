@@ -24,7 +24,9 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/quill/dist/quill.snow.css",
               "src/theme.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
             ],
             "scripts": [

@@ -20,10 +20,24 @@ router.get('/', (req, res) => {
     Post.find()
         .populate('user', ['name'])
         .populate('category', ['name'])
-        .sort({ date:-1 })
+        .sort({ createdDate:-1 })
         .then(posts => res.json(posts))
         .catch(err => res.status(404).json({ notfound: 'Posts not found.'}));
 });//Get posts ends
+
+//@Route    GET /api/posts/:id
+//@Desc     Get post by id
+//@Access   Public
+router.get('/:post_id', (req, res) => {
+    Post.findById(req.params.post_id)
+        .then(post => {
+            if (post) {
+                res.status(200).json(post);
+            } else {
+                res.status(404).json({ message: "Post not found!" });
+            }
+        })
+});//Get by id ends
 
 //@Route    POST /api/posts
 //@Desc     Create Post
@@ -44,7 +58,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
         comments:req.body.comments,
         likes:req.body.likes,
         user:req.user.id,
-        category:req.body.category
+        category:req.body.category,
+        isActive:req.body.isActive
     });
 
     newPost.save()
@@ -72,7 +87,8 @@ router.put('/:post_id', passport.authenticate('jwt', { session: false }), (req, 
         comments:req.body.comments,
         likes:req.body.likes,
         user:req.user.id,
-        category:req.body.category
+        category:req.body.category,
+        isActive:req.body.isActive
     });
 
     Post.updateOne({ _id:req.params.post_id }, newPost)
